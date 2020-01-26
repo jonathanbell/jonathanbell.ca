@@ -16,11 +16,11 @@
         <hr class="show" />
         <footer role="navigation">
             @if((int) $page !== 1)
-                <a href="/credit-to-creation/{{ $page - 1 }}"><< Previous</a>
+                <a href="/credit-to-creation/{{ $page - 1 }}">&lt;&lt; Previous</a>
             @endif
             <span style="font-weight: bold">{{ $page }} / {{ $number_of_pages }}</span>
             @if((int) $page < (int) $number_of_pages)
-                <a href="/credit-to-creation/{{ $page + 1 }}">Next >></a>
+                <a href="/credit-to-creation/{{ $page + 1 }}">Next &lt;&lt;</a>
             @endif
         </footer>
     @endif

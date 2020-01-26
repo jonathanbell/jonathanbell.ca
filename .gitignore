@@ -7,3 +7,7 @@
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
+
+# Workfiles
+deploy.sh
+
