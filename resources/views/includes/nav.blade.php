@@ -12,7 +12,7 @@
         <div><a href="mailto:jonathanbell.ca+site@gmail.com">Contact</a></div>
     </nav>
 
-    @if($section === 'Credit to Creation')
+    @if($section === 'Credit to Creation' && !Request::is('/'))
         <hr class="show" />
         <footer role="navigation">
             @if((int) $page !== 1)

@@ -8,7 +8,7 @@
                 <img
                     src="{{ $image['paths'][$image['length'] - 1] }}"
                     srcset="@for ($i = 0; $i < $image['length']; $i++){{ $image['paths'][$i] }} {{ $image['sizes'][$i] }}w{{ $i < $image['length'] - 1 ? ', ' : '' }}@endfor"
-                    sizes="(max-width: 666px) 666px, (max-width: 60rem) 365px, (max-width: 1600px) 700px, 900px"
+                    sizes="(max-width: 665px) 666px, (max-width: 65rem) 760px, (max-width: 1279px) 523px, 900px"
                     alt="A photograph by Jonathan Bell"
                 />
             </div>

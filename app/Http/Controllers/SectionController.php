@@ -20,6 +20,11 @@ class SectionController extends Controller
         'portraits' => 'Portraits',
     ];
 
+    /**
+     * Map the sections to the total photo count in each section.
+     *
+     * @var array
+     */
     protected $image_count_map = [
         'credit-to-creation' => 665,
         'selected-works-i' => 100,
@@ -32,7 +37,7 @@ class SectionController extends Controller
      *
      * @var array
      */
-    protected $image_widths = [666, 365, 700, 900];
+    protected $image_widths = [666, 761, 525, 900];
 
     /**
      * An array of possible section slugs.
@@ -50,12 +55,29 @@ class SectionController extends Controller
      * Helper function to convert human-readble sections to slugs.
      *
      * @param String $section
+     *   The section as a human-readable title.
+     *
      * @return String
+     *   The URL friendly slug of the section.
      */
     protected function getSlug(String $section): String {
         return trim(strtolower(str_replace(' ', '-', $section)));
     }
 
+    /**
+     * Give an image's section, index, and desired sizes, get the image URL.
+     *
+     * @param String $section
+     *   The image's section.
+     * @param integer $index
+     *   The image's index inside its section (this index is inside the image's
+     *   filename).
+     * @param Array $sizes
+     *   The desired sizes of the image as an array of integers.
+     *
+     * @return Array
+     *   The array of image URIs.
+     */
     protected function getImageUrls(String $section, int $index, Array $sizes): Array {
         // `q_83` = quality 83 percent
         $base = 'https://res.cloudinary.com/jonathanbell/image/upload/f_auto,c_fit,q_83,w_';
@@ -74,6 +96,8 @@ class SectionController extends Controller
      * Displays a portfolio section based on the portfolio slug.
      *
      * @param String $section_slug
+     *   The URL-friendly slug of the given portfolio section.
+     *
      * @return void
      */
     public function show(String $section_slug = null) {
@@ -101,7 +125,7 @@ class SectionController extends Controller
         }
 
         if (!in_array($section_slug, $this->section_slugs)) {
-            abort(404, 'Sorry, we can\'t find that page right now');
+            abort(404, 'Sorry, we can\'t find that page right now.');
         }
 
         $section = $this->sections[$section_slug];
@@ -119,20 +143,37 @@ class SectionController extends Controller
         return view('section', compact('section', 'sections', 'image_count', 'images'));
     }
 
+    /**
+     * Method similar to `show` but used for paginated (Credit to Creations) pages.
+     *
+     * @param String $page
+     *   The Credit to Creation page number.
+     *
+     * @return void
+     */
     public function index(String $page) {
-        $number_of_pages = 7;
-
-        if (!is_numeric($page) || (int) $page > $number_of_pages || $page < 1) {
-            abort(404, 'Sorry, we can\'t find that page right now');
+        if (!is_numeric($page)) {
+            abort(404, 'Sorry, we can\'t find that page right now.');
         }
 
         $section = 'Credit to Creation';
         $sections = $this->sections;
 
-        $image_count = (int) floor($this->image_count_map['credit-to-creation'] / $number_of_pages);
+        $total_blog_images = $this->image_count_map[$this->getSlug($section)];
+        $number_of_images_per_page = 69;
+        $number_of_pages = floor($total_blog_images / $number_of_images_per_page);
 
-        $tail = $image_count * (int) $page;
-        $head = $tail - $image_count + 1;
+        if ($page > $number_of_pages || $page < 1) {
+            abort(404, 'Sorry, we can\'t find that page right now.');
+        }
+
+        $tail = $page * $number_of_images_per_page;
+        $head = $tail - $number_of_images_per_page + 1;
+
+        if ($tail > $total_blog_images) {
+            $tail = $total_blog_images;
+            $head = $number_of_pages * $number_of_images_per_page;
+        }
 
         $images = [];
         for ($i = $head; $i <= $tail; $i++) {
@@ -143,7 +184,7 @@ class SectionController extends Controller
             ];
         }
 
-        return view('section', compact('section', 'sections', 'image_count', 'images', 'page', 'number_of_pages'));
+        return view('section', compact('section', 'sections', 'images', 'page', 'number_of_pages'));
     }
 
 }
