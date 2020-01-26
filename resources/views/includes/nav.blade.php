@@ -20,7 +20,7 @@
             @endif
             <span style="font-weight: bold">{{ $page }} / {{ $number_of_pages }}</span>
             @if((int) $page < (int) $number_of_pages)
-                <a href="/credit-to-creation/{{ $page + 1 }}">Next &lt;&lt;</a>
+                <a href="/credit-to-creation/{{ $page + 1 }}">Next &gt;&gt;</a>
             @endif
         </footer>
     @endif
