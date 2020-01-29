@@ -140,7 +140,12 @@ class SectionController extends Controller
             ];
         }
 
-        return view('section', compact('section', 'sections', 'image_count', 'images'));
+        // This is just in case the user lands on `/credit-to-creation`
+        // This path is not included in the menu.
+        $page = '1';
+        $number_of_pages = 1;
+
+        return view('section', compact('section', 'sections', 'image_count', 'images', 'page', 'number_of_pages'));
     }
 
     /**
