@@ -165,6 +165,10 @@
             max-width: 120rem;
         }
 
+        .bottom-nav {
+            padding: 1rem 0 2rem 0;
+        }
+
         /* =============================================================================
         HELPER CLASSES
         ============================================================================= */
@@ -244,6 +248,10 @@
             .portfolio-image:last-of-type {
                 grid-column: 2 / -1;
             } */
+
+            .bottom-nav {
+                display: none;
+            }
         }
 
         /* LARGE -------------------------------------------------------------------- */
@@ -288,6 +296,18 @@
 
     @include('includes.nav')
     @yield('content')
+
+    @if($section === 'Credit to Creation' && !Request::is('/'))
+        <footer role="navigation" class="bottom-nav">
+            @if((int) $page !== 1)
+                <a href="/credit-to-creation/{{ $page - 1 }}">&lt;&lt; Previous</a>
+            @endif
+            <span style="font-weight: bold">{{ $page }} / {{ $number_of_pages }}</span>
+            @if((int) $page < (int) $number_of_pages)
+                <a href="/credit-to-creation/{{ $page + 1 }}">Next &gt;&gt;</a>
+            @endif
+        </footer>
+    @endif
 
 </body>
 </html>

@@ -21,6 +21,13 @@ class SectionController extends Controller
     ];
 
     /**
+     * The section to be used for the "blog" section of the site.
+     *
+     * @var string
+     */
+    protected $blog_section = 'Credit to Creation';
+
+    /**
      * Map the sections to the total photo count in each section.
      *
      * @var array
@@ -161,12 +168,13 @@ class SectionController extends Controller
             abort(404, 'Sorry, we can\'t find that page right now.');
         }
 
-        $section = 'Credit to Creation';
+        $section = $this->blog_section;
         $sections = $this->sections;
 
         $total_blog_images = $this->image_count_map[$this->getSlug($section)];
         $number_of_images_per_page = 69;
-        $number_of_pages = floor($total_blog_images / $number_of_images_per_page);
+        $number_of_pages = ceil($total_blog_images / $number_of_images_per_page);
+        $last_page_remainder = $total_blog_images % $number_of_images_per_page;
 
         if ($page > $number_of_pages || $page < 1) {
             abort(404, 'Sorry, we can\'t find that page right now.');
@@ -177,7 +185,7 @@ class SectionController extends Controller
 
         if ($tail > $total_blog_images) {
             $tail = $total_blog_images;
-            $head = $number_of_pages * $number_of_images_per_page;
+            $head = $tail - $last_page_remainder;
         }
 
         $images = [];
