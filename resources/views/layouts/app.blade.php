@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The online photography portfolio of Jonathan Bell">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="dns-prefetch" href="https://res.cloudinary.com">
@@ -293,21 +295,27 @@
         }
     </style>
 </head>
-<body>
+<body id="top">
 
     @include('includes.nav')
     @yield('content')
 
-    @if($section === 'Credit to Creation' && !Request::is('/'))
-        <footer role="navigation" class="bottom-nav">
-            @if((int) $page !== 1)
-                <a href="/credit-to-creation/{{ $page - 1 }}">&lt;&lt; Previous</a>
-            @endif
-            <span style="font-weight: bold">{{ $page }} / {{ $number_of_pages }}</span>
-            @if((int) $page < (int) $number_of_pages)
-                <a href="/credit-to-creation/{{ $page + 1 }}">Next &gt;&gt;</a>
-            @endif
-        </footer>
+    @if(!Request::is('/'))
+        @if($section === 'Credit to Creation')
+            <footer role="navigation" class="bottom-nav">
+                @if((int) $page !== 1)
+                    <a href="/credit-to-creation/{{ $page - 1 }}">&lt;&lt; Previous</a>
+                @endif
+                <span style="font-weight: bold">{{ $page }} / {{ $number_of_pages }}</span>
+                @if((int) $page < (int) $number_of_pages)
+                    <a href="/credit-to-creation/{{ $page + 1 }}">Next &gt;&gt;</a>
+                @endif
+            </footer>
+        @else
+            <footer role="navigation" class="bottom-nav">
+                <a href="#top">&uarr; Back to top</a>
+            </footer>
+        @endif
     @endif
 
 </body>

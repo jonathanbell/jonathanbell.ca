@@ -3,11 +3,25 @@
 
     <nav>
         @foreach ($sections as $key => $value)
-            <div>
-                <a href="/{{ $key }}{{ $key === 'credit-to-creation' ? '/1' : '' }}">{{ $value }}</a>
-            </div>
+            @if ($key !== 'credit-to-creation')
+                <div>
+                    <a href="/{{ $key }}">{{ $value }}</a>
+                </div>
+            @endif
         @endforeach
         <hr />
+        <div>
+            <a
+                href="/credit-to-creation/1"
+                @if($section === 'Credit to Creation' && !Request::is('/'))
+                  style="font-weight: bold"
+                @endif
+            >
+                Credit to Creation
+            </a>
+        </div>
+        <hr />
+        <div><a href="https://log.jonathanbell.ca" title="bLog">Log</a></div>
         <div><a href="https://vimeo.com/jonathanbell">Video</a></div>
         <div><a href="mailto:jonathanbell.ca+site@gmail.com">Contact</a></div>
     </nav>
