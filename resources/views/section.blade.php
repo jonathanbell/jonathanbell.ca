@@ -6,9 +6,10 @@
         @foreach ($images as $image)
             <div class="image-item">
                 <img
-                    src="{{ $image['paths'][$image['length'] - 1] }}"
+                    src="{{ $image['paths'][0] }}"
+                    loading="lazy"
                     srcset="@for ($i = 0; $i < $image['length']; $i++){{ $image['paths'][$i] }} {{ $image['sizes'][$i] }}w{{ $i < $image['length'] - 1 ? ', ' : '' }}@endfor"
-                    sizes="(max-width: 665px) 666px, (max-width: 65rem) 760px, (max-width: 1279px) 523px, 900px"
+                    sizes="(min-width: 80rem) 47vw, (min-width: 65rem) 37vw, (min-width: 666px) 73vw, 100vw"
                     alt="A photograph by Jonathan Bell"
                 />
             </div>

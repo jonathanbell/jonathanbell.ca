@@ -115,6 +115,11 @@ class SectionController extends Controller
             $section = array_keys($this->section_slugs);
             shuffle($section);
             $section_slug = $this->section_slugs[$section[0]];
+
+            if ($section_slug === 'credit-to-creation') {
+                $section_slug = $this->section_slugs[$section[1]];
+            }
+
             $section = $this->sections[$section_slug];
 
             $image_number = rand(1, $this->image_count_map[$section_slug]);
