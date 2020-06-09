@@ -263,7 +263,7 @@
         /* EXTRA LARGE -------------------------------------------------------------- */
         
         @media only screen and (min-width: 1920px) {
-          .masthead {
+            .masthead {
                 width: 13%;
             }
 
