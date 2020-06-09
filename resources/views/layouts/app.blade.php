@@ -271,12 +271,12 @@
                 margin-left: 13%;
             }
             
-            .portfolio-image:nth-child(9n) {
+            .image-item:nth-child(9n) {
                 grid-column: 1 / 3;
             }
 
-            .portfolio-image:nth-child(11n),
-            .portfolio-image:last-of-type {
+            .image-item:nth-child(11n),
+            .image-item:last-of-type {
                 grid-column: 2 / -1;
             }
         }
