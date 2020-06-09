@@ -246,15 +246,6 @@
                 width: initial;
             }
 
-            /* .portfolio-image:nth-child(9n) {
-                grid-column: 1 / 3;
-            }
-
-            .portfolio-image:nth-child(11n),
-            .portfolio-image:last-of-type {
-                grid-column: 2 / -1;
-            } */
-
         }
 
         /* LARGE -------------------------------------------------------------------- */
@@ -266,6 +257,27 @@
 
             article {
                 margin-left: var(--extra-narrow-nav-width);
+            }
+        }
+        
+        /* EXTRA LARGE -------------------------------------------------------------- */
+        
+        @media only screen and (min-width: 1920px) {
+          .masthead {
+                width: 13%;
+            }
+
+            article {
+                margin-left: 13%;
+            }
+            
+            .portfolio-image:nth-child(9n) {
+                grid-column: 1 / 3;
+            }
+
+            .portfolio-image:nth-child(11n),
+            .portfolio-image:last-of-type {
+                grid-column: 2 / -1;
             }
         }
 
