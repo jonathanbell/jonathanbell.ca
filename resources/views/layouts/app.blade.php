@@ -245,7 +245,6 @@
             article img {
                 width: initial;
             }
-
         }
 
         /* LARGE -------------------------------------------------------------------- */
@@ -269,15 +268,6 @@
 
             article {
                 margin-left: 13%;
-            }
-            
-            .image-item:nth-child(9n) {
-                grid-column: 1 / 3;
-            }
-
-            .image-item:nth-child(11n),
-            .image-item:last-of-type {
-                grid-column: 2 / -1;
             }
         }
 
