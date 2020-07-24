@@ -11,3 +11,5 @@ Homestead.yaml
 # Workfiles
 deploy.sh
 
+.DS_Store
+.vscode/
