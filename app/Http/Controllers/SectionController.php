@@ -34,7 +34,7 @@ class SectionController extends Controller
      */
     protected $image_count_map = [
         'credit-to-creation' => 666,
-        'selected-works-i' => 100,
+        'selected-works-i' => 102,
         'selected-works-ii' => 65,
         'portraits' => 9,
     ];
